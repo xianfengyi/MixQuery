@@ -48,7 +48,7 @@
         <mybatis.spring.version>2.0.6</mybatis.spring.version>
 
         <spring.version>5.3.16</spring.version>
-        <spring.boot.version>2.6.4</spring.boot.version>
+        <spring.boot.version>2.7.0</spring.boot.version>
 
         <trpc.version>0.6.3</trpc.version>
         <atta.version>1.0.19</atta.version>
