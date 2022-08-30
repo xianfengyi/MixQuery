@@ -1,11 +1,11 @@
 package com.github.pioneeryi.client;
 
-import com.github.pioneeryi.MixQueryMeta;
+import com.github.pioneeryi.MixqMeta;
+import com.github.pioneeryi.exception.MixqJdbcException;
 import org.apache.calcite.avatica.AvaticaParameter;
 import org.apache.calcite.avatica.ColumnMetaData;
 
 import java.io.Closeable;
-import java.io.IOException;
 import java.util.List;
 
 public interface IRemoteClient extends Closeable {
@@ -21,18 +21,18 @@ public interface IRemoteClient extends Closeable {
     }
 
     /**
-     * Connect to Kylin restful service. IOException will be thrown if authentication failed.
+     * Connect to mixquery restful service. IOException will be thrown if authentication failed.
      */
-    void connect() throws IOException;
+    void connect() throws MixqJdbcException;
 
     /**
      * Retrieve meta data of given project.
      */
-    MixQueryMeta.MixMetaProject retrieveMetaData(String project) throws IOException;
+    MixqMeta.MixMetaProject retrieveMetaData(String project) throws MixqJdbcException;
 
     /**
      * Execute query remotely and get back result.
      */
-    QueryResult executeQuery(String sql, List<AvaticaParameter> params, List<Object> paramValues) throws IOException;
+    QueryResult executeQuery(String sql, List<AvaticaParameter> params, List<Object> paramValues) throws MixqJdbcException;
 
 }

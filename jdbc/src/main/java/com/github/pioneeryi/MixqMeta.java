@@ -9,9 +9,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class MixQueryMeta extends MetaImpl {
+public class MixqMeta extends MetaImpl {
 
-    public MixQueryMeta(AvaticaConnection connection) {
+    public MixqMeta(AvaticaConnection connection) {
         super(connection);
     }
 

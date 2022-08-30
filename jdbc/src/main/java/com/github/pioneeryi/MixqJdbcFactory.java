@@ -7,15 +7,15 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.TimeZone;
 
-public class MixQueryJdbcFactory implements AvaticaFactory {
+public class MixqJdbcFactory implements AvaticaFactory {
 
-    public static class Version40 extends MixQueryJdbcFactory {
+    public static class Version40 extends MixqJdbcFactory {
         public Version40() {
             super(4, 0);
         }
     }
 
-    public static class Version41 extends MixQueryJdbcFactory {
+    public static class Version41 extends MixqJdbcFactory {
         public Version41() {
             super(4, 1);
         }
@@ -25,7 +25,7 @@ public class MixQueryJdbcFactory implements AvaticaFactory {
     final int minor;
 
     /** Creates a JDBC factory with given major/minor version number. */
-    protected MixQueryJdbcFactory(int major, int minor) {
+    protected MixqJdbcFactory(int major, int minor) {
         this.major = major;
         this.minor = minor;
     }

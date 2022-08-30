@@ -25,7 +25,6 @@ public class Driver extends UnregisteredDriver {
         return CONNECTION_STRING_PREFIX;
     }
 
-
     @Override
     protected DriverVersion createDriverVersion() {
         return DriverVersion.load(Driver.class, "mixquery-jdbc.properties", "MixQuery JDBC Driver", "unknown version", "MixQuery", "unknown version");
@@ -37,15 +36,15 @@ public class Driver extends UnregisteredDriver {
             case JDBC_30:
                 throw new UnsupportedOperationException();
             case JDBC_40:
-                return MixQueryJdbcFactory.Version40.class.getName();
+                return MixqJdbcFactory.Version40.class.getName();
             case JDBC_41:
             default:
-                return MixQueryJdbcFactory.Version41.class.getName();
+                return MixqJdbcFactory.Version41.class.getName();
         }
     }
 
     @Override
     public Meta createMeta(AvaticaConnection connection) {
-        return new MixQueryMeta((MixQueryConnection) connection);
+        return new MixqMeta((MixqConnection) connection);
     }
 }
