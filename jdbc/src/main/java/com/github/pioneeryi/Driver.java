@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class Driver extends UnregisteredDriver {
 
-    private static final String CONNECTION_STRING_PREFIX = "jdbc:mixquery:";
+    public static final String CONNECTION_STRING_PREFIX = "jdbc:mixquery:";
 
     static {
         try {
