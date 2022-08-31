@@ -1,12 +1,12 @@
-package com.github.pioneeryi.controller.request;
+package com.github.pioneeryi.request;
 
 import java.io.Serializable;
 
 /**
- * sql query resquest.
+ * SqlRequest.
  *
- * @author yixianfeng
- * @since 2022/7/29 09:18
+ * @author pioneeryi
+ * @since 2022/5/17 11:08
  */
 public class SqlRequest implements Serializable {
 
@@ -26,5 +26,4 @@ public class SqlRequest implements Serializable {
     public String getSql() {
         return sql;
     }
-
 }
