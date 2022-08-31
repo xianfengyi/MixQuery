@@ -22,7 +22,7 @@ public class MixqConnection extends AvaticaConnection {
     protected MixqConnection(UnregisteredDriver driver, AvaticaFactory factory, String url, Properties info) throws SQLException {
         super(driver, factory, url, info);
         String odbcUrl = url;
-        odbcUrl = odbcUrl.replace(Driver.CONNECTION_STRING_PREFIX + "//", "");
+        odbcUrl = odbcUrl.replace(Driver.CONNECT_STRING_PREFIX + "//", "");
         String[] temps = odbcUrl.split("/");
 
         assert temps.length == 2;
@@ -37,6 +37,10 @@ public class MixqConnection extends AvaticaConnection {
         } catch (MixqJdbcException e) {
             throw new SQLException(e);
         }
+    }
+
+    public String getBaseUrl() {
+        return baseUrl;
     }
 
     @Override

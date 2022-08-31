@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class Driver extends UnregisteredDriver {
 
-    public static final String CONNECTION_STRING_PREFIX = "jdbc:mixquery:";
+    public static final String CONNECT_STRING_PREFIX = "jdbc:mixquery:";
 
     static {
         try {
@@ -22,7 +22,7 @@ public class Driver extends UnregisteredDriver {
 
     @Override
     protected String getConnectStringPrefix() {
-        return CONNECTION_STRING_PREFIX;
+        return CONNECT_STRING_PREFIX;
     }
 
     @Override
