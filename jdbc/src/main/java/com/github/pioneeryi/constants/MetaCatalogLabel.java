@@ -10,8 +10,6 @@ public enum MetaCatalogLabel {
     TABLE_CAT;
 
     public static String[] getNames() {
-        return Arrays.stream(values())
-                .map(label -> label.name())
-                .toArray(String[]::new);
+        return Arrays.stream(values()).map(label -> label.name()).toArray(String[]::new);
     }
 }

@@ -6,9 +6,13 @@ import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.client.ServiceUnavailableRetryStrategy;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.protocol.HttpContext;
@@ -28,6 +32,35 @@ public class HttpUtil {
     private static final Logger logger = LoggerFactory.getLogger(HttpUtil.class);
 
     private static final int MAX_RETIES = 3;
+
+    public static <T> T post(String url, Object requestBody, int socketTimeoutMs, Class<T> responseClazz) {
+        try {
+            //构造http请求
+            HttpPost post = new HttpPost(url);
+            String jsonBody = requestBody == null ? "{}" : JsonUtil.objectToJsonStr(requestBody);
+            StringEntity requestEntity = new StringEntity(jsonBody, ContentType.create("application/json", "UTF-8"));
+            post.setEntity(requestEntity);
+            //发送http请求
+            return requestHttp(post, socketTimeoutMs, responseClazz);
+        } catch (Exception e) {
+            logger.error("Send http request with post method fail.url={},body={}", url, requestBody, e);
+            throw new MixqJdbcException("Send http request fail.url:" + url, e);
+        }
+    }
+
+    public static <T> T get(String url, String username, String password, int socketTimeoutMs,
+                            Class<T> responseClazz) {
+        try {
+            //构造http请求
+            HttpGet get = new HttpGet(url);
+
+            //发送http请求
+            return requestHttp(get, socketTimeoutMs, responseClazz);
+        } catch (Exception e) {
+            logger.error("Send http request with get method fail.url={}", url, e);
+            throw new MixqJdbcException("Send http request fail.url:" + url, e);
+        }
+    }
 
     /**
      * 拼接url参数

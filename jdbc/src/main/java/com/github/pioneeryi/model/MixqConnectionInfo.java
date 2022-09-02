@@ -16,7 +16,7 @@ public class MixqConnectionInfo {
 
     private String baseUrl;
 
-    private Properties connectionProperties;
+    private Properties properties;
 
     /**
      * 通过jdbc Url和属性，构建JdbcConnectionInfo对象
@@ -29,17 +29,17 @@ public class MixqConnectionInfo {
      * baseUrl = xxx.xxx.com ,baseDb = default
      * connectionProperties = {"user":"user","password","password"}
      */
-    public MixqConnectionInfo(String url, Properties connectionProperties) {
+    public MixqConnectionInfo(String url, Properties properties) {
         this.url = url;
 
         String odbcUrl = url;
         //去掉jdbc:tedi:
         odbcUrl = odbcUrl.replaceAll(Driver.CONNECT_STRING_PREFIX, "");
 
-        this.connectionProperties = connectionProperties;
+        this.properties = properties;
         Map<String, String> urlParams = HttpUtil.getUrlParams(odbcUrl);
         urlParams.forEach((k, v) -> {
-            connectionProperties.put(k, v);
+            properties.put(k, v);
         });
 
         //去掉参数
@@ -70,8 +70,8 @@ public class MixqConnectionInfo {
         return baseUrl;
     }
 
-    public Properties getConnectionProperties() {
-        return connectionProperties;
+    public Properties getConnProperties() {
+        return properties;
     }
 
 }
