@@ -2,24 +2,24 @@ package com.github.pioneeryi.application.model;
 
 public class SchemaMeta {
 
-    private String tableSchem;
+    private String tableSchema;
 
     private String tableCatalog;
 
     public SchemaMeta() {
     }
 
-    public SchemaMeta(String tableSchem, String tableCatalog) {
-        this.tableSchem = tableSchem;
+    public SchemaMeta(String tableSchema, String tableCatalog) {
+        this.tableSchema = tableSchema;
         this.tableCatalog = tableCatalog;
     }
 
-    public String getTableSchem() {
-        return tableSchem;
+    public String getTableSchema() {
+        return tableSchema;
     }
 
-    public void setTableSchem(String tableSchem) {
-        this.tableSchem = tableSchem;
+    public void setTableSchema(String tableSchema) {
+        this.tableSchema = tableSchema;
     }
 
     public String getTableCatalog() {

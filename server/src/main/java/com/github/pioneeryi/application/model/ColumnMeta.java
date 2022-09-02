@@ -3,7 +3,7 @@ package com.github.pioneeryi.application.model;
 public class ColumnMeta {
 
     private String tableCat;
-    private String tableSchem;
+    private String tableSchema;
     private String tableName;
     private String columnName;
     private int dataType;
@@ -20,7 +20,7 @@ public class ColumnMeta {
     private int charOctetLength;
     private int ordinalPosition;
     private String isNullable;
-    private String scopeCatlog;
+    private String scopeCatalog;
     private String scopeSchema;
     private String scopeTable;
     private short sourceDataType;
@@ -31,8 +31,8 @@ public class ColumnMeta {
         this.tableCat = tableCat;
     }
 
-    public void setTableSchem(String tableSchem) {
-        this.tableSchem = tableSchem;
+    public void setTableSchema(String tableSchema) {
+        this.tableSchema = tableSchema;
     }
 
     public void setTableName(String tableName) {
@@ -99,8 +99,8 @@ public class ColumnMeta {
         this.isNullable = isNullable;
     }
 
-    public void setScopeCatlog(String scopeCatlog) {
-        this.scopeCatlog = scopeCatlog;
+    public void setScopeCatalog(String scopeCatalog) {
+        this.scopeCatalog = scopeCatalog;
     }
 
     public void setScopeSchema(String scopeSchema) {
@@ -127,8 +127,8 @@ public class ColumnMeta {
         return tableCat;
     }
 
-    public String getTableSchem() {
-        return tableSchem;
+    public String getTableSchema() {
+        return tableSchema;
     }
 
     public String getTableName() {
@@ -195,8 +195,8 @@ public class ColumnMeta {
         return isNullable;
     }
 
-    public String getScopeCatlog() {
-        return scopeCatlog;
+    public String getScopeCatalog() {
+        return scopeCatalog;
     }
 
     public String getScopeSchema() {
@@ -225,8 +225,8 @@ public class ColumnMeta {
                 .append("ColumnMetaResult{")
                 .append("tableCat='")
                 .append(tableCat).append('\'')
-                .append(", tableSchem='")
-                .append(tableSchem).append('\'')
+                .append(", tableSchema='")
+                .append(tableSchema).append('\'')
                 .append(", tableName='")
                 .append(tableName).append('\'')
                 .append(", columnName='")
@@ -260,7 +260,7 @@ public class ColumnMeta {
                 .append(", isNullable='")
                 .append(isNullable).append('\'')
                 .append(", scopeCatlog='")
-                .append(scopeCatlog).append('\'')
+                .append(scopeCatalog).append('\'')
                 .append(", scopeSchema='")
                 .append(scopeSchema).append('\'')
                 .append(", scopeTable='")

@@ -2,12 +2,12 @@ package com.github.pioneeryi.application.model;
 
 public class TableMeta {
     private String tableCat;
-    private String tableSchem;
+    private String tableSchema;
     private String tableName;
     private String tableType;
     private String remarks;
     private String typeCat;
-    private String typeSchem;
+    private String typeSchema;
     private String typeName;
     private String selfReferencingColName;
     private String refGeneration;
@@ -16,8 +16,8 @@ public class TableMeta {
         this.tableCat = tableCat;
     }
 
-    public void setTableSchem(String tableSchem) {
-        this.tableSchem = tableSchem;
+    public void setTableSchema(String tableSchema) {
+        this.tableSchema = tableSchema;
     }
 
     public void setTableName(String tableName) {
@@ -36,8 +36,8 @@ public class TableMeta {
         this.typeCat = typeCat;
     }
 
-    public void setTypeSchem(String typeSchem) {
-        this.typeSchem = typeSchem;
+    public void setTypeSchema(String typeSchema) {
+        this.typeSchema = typeSchema;
     }
 
     public void setTypeName(String typeName) {
@@ -56,8 +56,8 @@ public class TableMeta {
         return tableCat;
     }
 
-    public String getTableSchem() {
-        return tableSchem;
+    public String getTableSchema() {
+        return tableSchema;
     }
 
     public String getTableName() {
@@ -76,8 +76,8 @@ public class TableMeta {
         return typeCat;
     }
 
-    public String getTypeSchem() {
-        return typeSchem;
+    public String getTypeSchema() {
+        return typeSchema;
     }
 
     public String getTypeName() {
@@ -98,8 +98,8 @@ public class TableMeta {
                 .append("TableMetaResult{")
                 .append("tableCat='")
                 .append(tableCat).append('\'')
-                .append(", tableSchem='")
-                .append(tableSchem).append('\'')
+                .append(", tableSchema='")
+                .append(tableSchema).append('\'')
                 .append(", tableName='")
                 .append(tableName).append('\'')
                 .append(", tableType='")
@@ -108,8 +108,8 @@ public class TableMeta {
                 .append(remarks).append('\'')
                 .append(", typeCat='")
                 .append(typeCat).append('\'')
-                .append(", typeSchem='")
-                .append(typeSchem).append('\'')
+                .append(", typeSchema='")
+                .append(typeSchema).append('\'')
                 .append(", typeName='")
                 .append(typeName).append('\'')
                 .append(", selfReferencingColName='")

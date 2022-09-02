@@ -14,7 +14,7 @@ public class SelectedColumnMeta implements Serializable {
     private String label;// AS keyword
     private String name;
     private String schemaName;
-    private String catelogName;
+    private String catalogName;
     private String tableName;
     private int precision;
     private int scale;
@@ -29,7 +29,7 @@ public class SelectedColumnMeta implements Serializable {
 
     public SelectedColumnMeta(boolean isAutoIncrement, boolean isCaseSensitive, boolean isSearchable,
                               boolean isCurrency, int isNullalbe, boolean isSigned, int displaySize, String label,
-                              String name, String schemaName, String catelogName, String tableName, int precision,
+                              String name, String schemaName, String catalogName, String tableName, int precision,
                               int scale, int columnType, String columnTypeName, boolean isReadOnly, boolean isWritable,
                               boolean isDefinitelyWritable) {
         super();
@@ -43,7 +43,7 @@ public class SelectedColumnMeta implements Serializable {
         this.label = label;
         this.name = name;
         this.schemaName = schemaName;
-        this.catelogName = catelogName;
+        this.catalogName = catalogName;
         this.tableName = tableName;
         this.precision = precision;
         this.scale = scale;
@@ -134,12 +134,12 @@ public class SelectedColumnMeta implements Serializable {
         this.schemaName = schemaName;
     }
 
-    public String getCatelogName() {
-        return catelogName;
+    public String getCatalogName() {
+        return catalogName;
     }
 
-    public void setCatelogName(String catelogName) {
-        this.catelogName = catelogName;
+    public void setCatalogName(String catalogName) {
+        this.catalogName = catalogName;
     }
 
     public String getTableName() {

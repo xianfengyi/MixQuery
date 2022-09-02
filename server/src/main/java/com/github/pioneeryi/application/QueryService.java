@@ -104,12 +104,12 @@ public class QueryService {
 
                 TableMeta tableMeta = new TableMeta();
                 tableMeta.setTableCat(StringUtils.defaultString(catalogName, "defaultCatalog"));
-                tableMeta.setTableSchem(StringUtils.defaultString(schemaName, "defaultSchema"));
+                tableMeta.setTableSchema(StringUtils.defaultString(schemaName, "defaultSchema"));
                 tableMeta.setTableName(JDBCTableMeta.getString(3));
                 tableMeta.setTableType(JDBCTableMeta.getString(4));
                 tableMeta.setRemarks(JDBCTableMeta.getString(5));
                 tableMeta.setTypeCat(JDBCTableMeta.getString(6));
-                tableMeta.setTypeSchem(JDBCTableMeta.getString(7));
+                tableMeta.setTypeSchema(JDBCTableMeta.getString(7));
                 tableMeta.setTypeName(JDBCTableMeta.getString(8));
                 tableMeta.setSelfReferencingColName(JDBCTableMeta.getString(9));
                 tableMeta.setRefGeneration(JDBCTableMeta.getString(10));
@@ -144,7 +144,7 @@ public class QueryService {
 
                 ColumnMeta colmnMeta = new ColumnMeta();
                 colmnMeta.setTableCat(StringUtils.defaultString(catalogName, "defaultCatalog"));
-                colmnMeta.setTableSchem(StringUtils.defaultString(schemaName, "defaultSchema"));
+                colmnMeta.setTableSchema(StringUtils.defaultString(schemaName, "defaultSchema"));
                 colmnMeta.setTableName(columnMeta.getString(3));
                 colmnMeta.setColumnName(columnMeta.getString(4));
                 colmnMeta.setDataType(columnMeta.getInt(5));
@@ -161,7 +161,7 @@ public class QueryService {
                 colmnMeta.setCharOctetLength(columnMeta.getInt(16));
                 colmnMeta.setOrdinalPosition(columnMeta.getInt(17));
                 colmnMeta.setIsNullable(columnMeta.getString(18));
-                colmnMeta.setScopeCatlog(columnMeta.getString(19));
+                colmnMeta.setScopeCatalog(columnMeta.getString(19));
                 colmnMeta.setScopeSchema(columnMeta.getString(20));
                 colmnMeta.setScopeTable(columnMeta.getString(21));
                 colmnMeta.setSourceDataType(getShort(columnMeta.getString(22)));
