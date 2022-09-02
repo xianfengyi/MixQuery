@@ -178,7 +178,7 @@ public class QueryService {
         } catch (ClassNotFoundException e) {
             throw new SQLException("driver not found");
         }
-        String url = "jdbc:mysql://9.134.71.205:3306/test";
+        String url = "jdbc:mysql://localhost:3306/test";
         return DriverManager.getConnection(url, "root", "123456");
     }
 
