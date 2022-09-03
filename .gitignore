@@ -38,3 +38,6 @@ mvnw.cmd
 mvnw
 h2
 .DS_Store
+
+
+**/application.yml

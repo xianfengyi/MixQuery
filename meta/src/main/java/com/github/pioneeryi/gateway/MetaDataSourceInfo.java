@@ -1,11 +1,26 @@
 package com.github.pioneeryi.gateway;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@Component
+@ConfigurationProperties(prefix = "datasource.meta")
 public class MetaDataSourceInfo {
 
     private String driver;
     private String jdbcUrl;
     private String username;
     private String password;
+
+    public MetaDataSourceInfo() {
+    }
+
+    public MetaDataSourceInfo(String driver, String jdbcUrl, String username, String password) {
+        this.driver = driver;
+        this.jdbcUrl = jdbcUrl;
+        this.username = username;
+        this.password = password;
+    }
 
     public String getDriver() {
         return driver;

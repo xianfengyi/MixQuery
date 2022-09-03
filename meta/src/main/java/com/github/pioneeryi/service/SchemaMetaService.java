@@ -5,6 +5,8 @@ import com.github.pioneeryi.domain.SchemaType;
 import com.github.pioneeryi.model.AddDatasourceCmd;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SchemaMetaService {
 
+    @Autowired
     private SchemaMetaRepo schemaRepo;
 
     public SchemaMetaService() {

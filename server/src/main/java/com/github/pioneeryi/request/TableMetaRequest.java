@@ -12,6 +12,9 @@ public class TableMetaRequest implements Serializable {
 
     private String dbName;
 
+    public TableMetaRequest() {
+    }
+
     public TableMetaRequest(String dbName) {
         this.dbName = dbName;
     }

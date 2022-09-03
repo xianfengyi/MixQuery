@@ -2,6 +2,7 @@ package com.github.pioneeryi.application;
 
 import com.github.pioneeryi.application.model.*;
 import com.github.pioneeryi.core.SqlExecutor;
+import com.github.pioneeryi.gateway.MetaDataSourceInfo;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class QueryService {
 
     @Autowired
     private SqlExecutor sqlExecutor;
+
+    @Autowired
+    private MetaDataSourceInfo metaDataSourceInfo;
 
     public QueryService() {
     }
@@ -174,12 +178,12 @@ public class QueryService {
 
     private Connection getConnection() throws SQLException {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(metaDataSourceInfo.getDriver());
         } catch (ClassNotFoundException e) {
             throw new SQLException("driver not found");
         }
-        String url = "jdbc:mysql://localhost:3306/test";
-        return DriverManager.getConnection(url, "root", "123456");
+        String url = metaDataSourceInfo.getJdbcUrl();
+        return DriverManager.getConnection(url, metaDataSourceInfo.getUsername(), metaDataSourceInfo.getPassword());
     }
 
     protected int getInt(String content) {
