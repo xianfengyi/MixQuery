@@ -1,51 +1,36 @@
 package com.github.pioneeryi;
 
 import com.github.pioneeryi.client.IRemoteClient;
-import com.github.pioneeryi.client.MixQueryClient;
-import com.github.pioneeryi.exception.MixqJdbcException;
+import com.github.pioneeryi.client.MixqClient;
+import com.github.pioneeryi.model.MixqConnectionInfo;
 import org.apache.calcite.avatica.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class MixqConnection extends AvaticaConnection {
 
     private static final Logger logger = LoggerFactory.getLogger(MixqConnection.class);
 
-    private final String baseUrl;
-    private final String project;
     private final IRemoteClient remoteClient;
 
-    protected MixqConnection(UnregisteredDriver driver, AvaticaFactory factory, String url, Properties info) throws SQLException {
-        super(driver, factory, url, info);
-        String odbcUrl = url;
-        odbcUrl = odbcUrl.replace(Driver.CONNECT_STRING_PREFIX + "//", "");
-        String[] temps = odbcUrl.split("/");
+    protected MixqConnection(UnregisteredDriver driver, AvaticaFactory factory, MixqConnectionInfo connInfo) {
+        super(driver, factory, connInfo.getUrl(), connInfo.getConnProperties());
+        logger.debug("Mixquery base url " + connInfo.getBaseUrl() + ", project name " + connInfo.getBaseDb());
 
-        assert temps.length == 2;
+        this.remoteClient = new MixqClient(connInfo);
 
-        this.baseUrl = temps[0];
-        this.project = temps[1];
-
-        this.remoteClient = new MixQueryClient();
-
-        try {
-            this.remoteClient.connect();
-        } catch (MixqJdbcException e) {
-            throw new SQLException(e);
-        }
-    }
-
-    public String getBaseUrl() {
-        return baseUrl;
+        this.remoteClient.connect();
     }
 
     @Override
-    public AvaticaStatement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability)
-            throws SQLException {
+    public AvaticaStatement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
         return super.createStatement(resultSetType, resultSetConcurrency, resultSetHoldability);
     }
 
@@ -66,11 +51,9 @@ public class MixqConnection extends AvaticaConnection {
     }
 
     @Override
-    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency,
-                                              int resultSetHoldability) throws SQLException {
+    public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
         Meta.Signature sig = createSignature(sql);
-        return factory().newPreparedStatement(this, null, sig, resultSetType, resultSetConcurrency,
-                resultSetHoldability);
+        return factory().newPreparedStatement(this, null, sig, resultSetType, resultSetConcurrency, resultSetHoldability);
     }
 
     Meta.Signature createSignature(String sql) {

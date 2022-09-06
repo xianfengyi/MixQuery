@@ -27,27 +27,31 @@ public class MixqResultSet extends AvaticaResultSet {
         }
 
         String sql = signature.sql;
-        List<AvaticaParameter> params = signature.parameters;
-        List<Object> paramValues = null;
-        if (!(statement instanceof MixqPreparedStatement)) {
-            params = null;
-        } else if (params != null && params.size() > 0) {
-            paramValues = ((MixqPreparedStatement) statement).getParameterJDBCValues();
-        }
+        List<Object> paramValues = convertPrepareParams(signature.parameters);
 
         IRemoteClient client = ((MixqConnection) statement.connection).getRemoteClient();
         IRemoteClient.QueryResult result = null;
         try {
-            result = client.executeQuery(sql, params, paramValues);
+            result = client.executeQuery(sql, paramValues, statement.getQueryTimeout());
         } catch (Exception e) {
             throw new SQLException(e);
         }
 
+        //设置列元数据
         columnMetaDataList.clear();
         columnMetaDataList.addAll(result.columnMeta);
 
         //生成游标对象(Style = ARRAY)
         cursor = MetaImpl.createCursor(signature.cursorFactory, result.iterable);
         return super.execute2(cursor, columnMetaDataList);
+    }
+
+    private List<Object> convertPrepareParams(List<AvaticaParameter> params) {
+        List<Object> paramValues = null;
+        if (statement instanceof MixqPreparedStatement && params != null && !params.isEmpty()) {
+            //获取PreparedStatement的预编译字段
+            paramValues = ((MixqPreparedStatement) statement).getParameterJDBCValues();
+        }
+        return paramValues;
     }
 }

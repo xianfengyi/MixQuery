@@ -1,7 +1,6 @@
 package com.github.pioneeryi.client;
 
 import com.github.pioneeryi.exception.MixqJdbcException;
-import org.apache.calcite.avatica.AvaticaParameter;
 import org.apache.calcite.avatica.ColumnMetaData;
 import org.apache.calcite.avatica.MetaImpl;
 
@@ -28,7 +27,7 @@ public interface IRemoteClient extends Closeable {
     /**
      * Execute query remotely and get back result.
      */
-    QueryResult executeQuery(String sql, List<AvaticaParameter> params, List<Object> paramValues, int timeoutS) throws MixqJdbcException;
+    QueryResult executeQuery(String sql, List<Object> paramValues, int timeoutS) throws MixqJdbcException;
 
     /**
      * Close statement.
@@ -46,14 +45,14 @@ public interface IRemoteClient extends Closeable {
     void close(int statementId) throws MixqJdbcException;
 
     /**
-     * 获取数据库catalog信息
+     * 获取数据库 catalog 信息
      *
      * @return catalog信息
      */
     List<MetaImpl.MetaCatalog> getCatalogs() throws MixqJdbcException;
 
     /**
-     * 获取数据库schema元数据信息
+     * 获取数据库 schema 元数据信息
      *
      * @param catalog       catalog名。用于匹配数据库中catalog下的schema。"" 表示匹配没有catalog的schema，null表示任意catalog下的schema
      * @param schemaPattern schema名pattern。用于匹配数据库中schema。null表示任意schema

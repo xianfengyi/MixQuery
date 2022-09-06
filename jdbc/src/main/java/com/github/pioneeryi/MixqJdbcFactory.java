@@ -24,7 +24,9 @@ public class MixqJdbcFactory implements AvaticaFactory {
     final int major;
     final int minor;
 
-    /** Creates a JDBC factory with given major/minor version number. */
+    /**
+     * Creates a JDBC factory with given major/minor version number.
+     */
     protected MixqJdbcFactory(int major, int minor) {
         this.major = major;
         this.minor = minor;

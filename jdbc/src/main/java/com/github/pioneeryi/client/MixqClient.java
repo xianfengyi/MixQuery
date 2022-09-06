@@ -28,9 +28,9 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class MixQueryClient implements IRemoteClient {
+public class MixqClient implements IRemoteClient {
 
-    private static final Logger logger = LoggerFactory.getLogger(MixQueryClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(MixqClient.class);
 
     // http socket 超时时间
     private static final int HTTP_TIMEOUT = 3 * 60 * 1000;
@@ -40,7 +40,7 @@ public class MixQueryClient implements IRemoteClient {
 
     private MixqConnectionInfo connInfo;
 
-    public MixQueryClient(MixqConnectionInfo connInfo) {
+    public MixqClient(MixqConnectionInfo connInfo) {
         this.connInfo = connInfo;
     }
 
