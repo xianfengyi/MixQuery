@@ -19,7 +19,6 @@ import com.github.pioneeryi.util.HttpUtil;
 import com.github.pioneeryi.util.JdbcTypeUtil;
 import com.github.pioneeryi.util.JsonUtil;
 import com.google.common.base.Strings;
-import org.apache.calcite.avatica.AvaticaParameter;
 import org.apache.calcite.avatica.ColumnMetaData;
 import org.apache.calcite.avatica.MetaImpl;
 import org.slf4j.Logger;
@@ -50,7 +49,7 @@ public class MixqClient implements IRemoteClient {
     }
 
     @Override
-    public QueryResult executeQuery(String sql, List<AvaticaParameter> params, List<Object> paramValues, int timeoutS)
+    public QueryResult executeQuery(String sql, List<Object> paramValues, int timeoutS)
             throws MixqJdbcException {
         //调用 MixQuery server Api 获取查询结果
         ExecuteResult executeResult = doExecuteQuery(sql, convertParameters(paramValues), timeoutS);

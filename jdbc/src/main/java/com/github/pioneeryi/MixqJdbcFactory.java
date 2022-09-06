@@ -1,5 +1,6 @@
 package com.github.pioneeryi;
 
+import com.github.pioneeryi.model.MixqConnectionInfo;
 import org.apache.calcite.avatica.*;
 
 import java.sql.ResultSetMetaData;
@@ -43,32 +44,40 @@ public class MixqJdbcFactory implements AvaticaFactory {
     }
 
     @Override
-    public AvaticaConnection newConnection(UnregisteredDriver unregisteredDriver, AvaticaFactory avaticaFactory, String s, Properties properties) throws SQLException {
-        return null;
+    public AvaticaConnection newConnection(UnregisteredDriver driver, AvaticaFactory factory, String url, Properties properties) throws SQLException {
+        return new MixqConnection(driver, factory, new MixqConnectionInfo(url, properties));
     }
 
     @Override
-    public AvaticaStatement newStatement(AvaticaConnection avaticaConnection, Meta.StatementHandle statementHandle, int i, int i1, int i2) throws SQLException {
-        return null;
+    public AvaticaStatement newStatement(AvaticaConnection connection, Meta.StatementHandle statementHandle, int resultSetType,
+                                         int resultSetConcurrency, int resultSetHoldability) throws SQLException {
+        return new MixqStatement(connection, statementHandle, resultSetType, resultSetConcurrency,
+                resultSetHoldability);
     }
 
     @Override
-    public AvaticaPreparedStatement newPreparedStatement(AvaticaConnection avaticaConnection, Meta.StatementHandle statementHandle, Meta.Signature signature, int i, int i1, int i2) throws SQLException {
-        return null;
+    public AvaticaPreparedStatement newPreparedStatement(AvaticaConnection connection, Meta.StatementHandle handle,
+                                                         Meta.Signature signature, int resultSetType,
+                                                         int resultSetConcurrency, int resultSetHoldability) throws SQLException {
+        return new MixqPreparedStatement(connection, handle, signature, resultSetType, resultSetConcurrency,
+                resultSetHoldability);
     }
 
     @Override
-    public AvaticaResultSet newResultSet(AvaticaStatement avaticaStatement, QueryState queryState, Meta.Signature signature, TimeZone timeZone, Meta.Frame frame) throws SQLException {
-        return null;
+    public AvaticaResultSet newResultSet(AvaticaStatement statement, QueryState state, Meta.Signature signature,
+                                         TimeZone timeZone, Meta.Frame firstFrame) throws SQLException {
+        AvaticaResultSetMetaData resultSetMetaData = new AvaticaResultSetMetaData(statement, null, signature);
+        return new MixqResultSet(statement, state, signature, resultSetMetaData, timeZone, firstFrame);
     }
 
     @Override
     public AvaticaSpecificDatabaseMetaData newDatabaseMetaData(AvaticaConnection avaticaConnection) {
-        return null;
+        return new AvaticaDatabaseMetaData(avaticaConnection) {
+        };
     }
 
     @Override
-    public ResultSetMetaData newResultSetMetaData(AvaticaStatement avaticaStatement, Meta.Signature signature) throws SQLException {
-        return null;
+    public ResultSetMetaData newResultSetMetaData(AvaticaStatement statement, Meta.Signature signature) throws SQLException {
+        return new AvaticaResultSetMetaData(statement, null, signature);
     }
 }
