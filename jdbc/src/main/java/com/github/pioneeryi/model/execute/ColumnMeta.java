@@ -15,7 +15,7 @@ public class ColumnMeta {
     private String label;// AS keyword
     private String name;
     private String schemaName;
-    private String catelogName;
+    private String catalogName;
     private String tableName;
     private int precision;
     private int scale;
@@ -65,8 +65,8 @@ public class ColumnMeta {
         this.schemaName = schemaName;
     }
 
-    public void setCatelogName(String catelogName) {
-        this.catelogName = catelogName;
+    public void setCatalogName(String catalogName) {
+        this.catalogName = catalogName;
     }
 
     public void setTableName(String tableName) {
@@ -141,8 +141,8 @@ public class ColumnMeta {
         return schemaName;
     }
 
-    public String getCatelogName() {
-        return catelogName;
+    public String getCatalogName() {
+        return catalogName;
     }
 
     public String getTableName() {
@@ -201,8 +201,8 @@ public class ColumnMeta {
                 .append(name).append('\'')
                 .append(", schemaName='")
                 .append(schemaName).append('\'')
-                .append(", catelogName='")
-                .append(catelogName).append('\'')
+                .append(", catalogName='")
+                .append(catalogName).append('\'')
                 .append(", tableName='")
                 .append(tableName).append('\'')
                 .append(", precision=")

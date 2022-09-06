@@ -1,9 +1,9 @@
 package com.github.pioneeryi.model;
 
+import com.github.pioneeryi.Driver;
 import com.github.pioneeryi.util.HttpUtil;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Iterables;
-import org.apache.calcite.avatica.remote.Driver;
 
 import java.util.Map;
 import java.util.Properties;

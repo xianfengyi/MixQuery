@@ -191,7 +191,7 @@ public class MixqClient implements IRemoteClient {
 
         //转换为avatica定义的类型
         List<MetaImpl.MetaColumn> metaColumns = result.stream()
-                .map(res -> new MetaImpl.MetaColumn(res.getTableCat(), res.getTableSchem(), res.getTableName(),
+                .map(res -> new MetaImpl.MetaColumn(res.getTableCat(), res.getTableSchema(), res.getTableName(),
                         res.getColumnName(), res.getDataType(), res.getTypeName(), res.getColumnSize(),
                         res.getDecimalDigits(), res.getNumPrecRadix(), res.getNullable(), res.getCharOctetLength(),
                         res.getOrdinalPosition(), res.getIsNullable()))

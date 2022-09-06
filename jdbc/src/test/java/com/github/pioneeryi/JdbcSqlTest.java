@@ -10,10 +10,10 @@ public class JdbcSqlTest {
     public void testTediSqlQuery() throws ClassNotFoundException {
         Class.forName("com.github.pioneeryi.Driver");
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mixquery:localhost:9093/test")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mixquery:localhost:9093/mixquery","root","Yxf209831")) {
             // 查询数据
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select * from student");
+            ResultSet rs = stmt.executeQuery("select * from db1.student");
             printRs(rs);
         } catch (SQLException exception) {
             exception.printStackTrace();
