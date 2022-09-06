@@ -44,7 +44,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
                 <configuration>
-                    <mainClass>com.github.pioneeryi.Application</mainClass>
+                    <mainClass>com.pioneeryi.mixquery.server.Application</mainClass>
                 </configuration>
                 <executions>
                     <execution>
