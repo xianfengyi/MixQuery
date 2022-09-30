@@ -24,7 +24,7 @@
         <maven.resources.plugin>3.1.0</maven.resources.plugin>
         <maven.dependency.plugin>3.2.0</maven.dependency.plugin>
 
-        <calcite.version>1.26.0</calcite.version>
+        <calcite.version>1.32.0</calcite.version>
         <avatica.version>1.22.0</avatica.version>
         <javacc.version>2.4</javacc.version>
         <fmpp.version>1.0</fmpp.version>
