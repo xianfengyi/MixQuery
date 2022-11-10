@@ -1,30 +1,16 @@
 package com.pioneeryi.mixquery.core;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import org.apache.calcite.avatica.util.Casing;
 import org.apache.calcite.avatica.util.Quoting;
-import org.apache.calcite.sql.SqlAsOperator;
-import org.apache.calcite.sql.SqlBasicCall;
-import org.apache.calcite.sql.SqlCall;
-import org.apache.calcite.sql.SqlDataTypeSpec;
-import org.apache.calcite.sql.SqlDynamicParam;
-import org.apache.calcite.sql.SqlIdentifier;
-import org.apache.calcite.sql.SqlIntervalQualifier;
-import org.apache.calcite.sql.SqlJoin;
-import org.apache.calcite.sql.SqlLiteral;
-import org.apache.calcite.sql.SqlNode;
-import org.apache.calcite.sql.SqlNodeList;
-import org.apache.calcite.sql.SqlOrderBy;
-import org.apache.calcite.sql.SqlSelect;
-import org.apache.calcite.sql.SqlWith;
-import org.apache.calcite.sql.SqlWithItem;
+import org.apache.calcite.sql.*;
 import org.apache.calcite.sql.parser.SqlParseException;
 import org.apache.calcite.sql.parser.SqlParser;
 import org.apache.calcite.sql.util.SqlVisitor;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Parse SQL line and extract the table name.
@@ -87,15 +73,16 @@ public class TableNameExtractor implements SqlVisitor<List<String>> {
     }
 
     private void visitBasicCall(SqlBasicCall sqlCall) {
-        if (sqlCall.getOperator() instanceof SqlAsOperator && (sqlCall).operands.length == 2) {
-            if ((sqlCall).operands[0] instanceof SqlIdentifier
-                    && (sqlCall).operands[1] instanceof SqlIdentifier) {
-                (sqlCall).operands[0].accept(this);
-            } else if (!((sqlCall).operands[0] instanceof SqlIdentifier)) {
-                (sqlCall).operands[0].accept(this);
+        if (sqlCall.getOperator() instanceof SqlAsOperator && (sqlCall).getOperandList().size() == 2) {
+            List<SqlNode> operandList = (sqlCall).getOperandList();
+            if (operandList.get(0) instanceof SqlIdentifier && operandList.get(1) instanceof SqlIdentifier) {
+                operandList.get(0).accept(this);
+            } else if (!(operandList.get(0) instanceof SqlIdentifier)) {
+                operandList.get(0).accept(this);
             }
         } else {
-            Arrays.stream((sqlCall).operands).forEach((node) -> {
+            List<SqlNode> operandList = (sqlCall).getOperandList();
+            operandList.forEach((node) -> {
                 if (node instanceof SqlSelect) {
                     if (((SqlSelect) node).getFrom() != null) {
                         ((SqlSelect) node).getFrom().accept(this);
@@ -164,7 +151,6 @@ public class TableNameExtractor implements SqlVisitor<List<String>> {
      * Get table names from sql.
      *
      * @param sql SQL line
-     *
      * @return List of TableName
      */
     public List<String> parseTableName(String sql) throws SqlParseException {
