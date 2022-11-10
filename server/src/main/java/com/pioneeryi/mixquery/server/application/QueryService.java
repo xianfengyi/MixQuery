@@ -1,10 +1,8 @@
 package com.pioneeryi.mixquery.server.application;
 
-import com.github.pioneeryi.application.model.*;
-import com.pioneeryi.mixquery.core.SqlExecutor;
-import com.pioneeryi.mixquery.core.application.model.*;
-import com.pioneeryi.mixquery.meta.gateway.MetaDataSourceInfo;
 import com.google.common.collect.Lists;
+import com.pioneeryi.mixquery.core.SqlExecutor;
+import com.pioneeryi.mixquery.meta.gateway.MetaDataSourceInfo;
 import com.pioneeryi.mixquery.server.application.model.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

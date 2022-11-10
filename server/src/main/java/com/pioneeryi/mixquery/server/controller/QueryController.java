@@ -5,8 +5,6 @@ import com.pioneeryi.mixquery.server.application.model.ColumnMeta;
 import com.pioneeryi.mixquery.server.application.model.QueryResult;
 import com.pioneeryi.mixquery.server.application.model.SchemaMeta;
 import com.pioneeryi.mixquery.server.application.model.TableMeta;
-import com.github.pioneeryi.request.*;
-import com.pioneeryi.mixquery.core.request.*;
 import com.pioneeryi.mixquery.server.request.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tedi-sql")
+@RequestMapping("/mixquery/jdbc")
 public class QueryController {
 
     private static final Logger log = LoggerFactory.getLogger(QueryController.class);
@@ -29,7 +27,7 @@ public class QueryController {
     @Autowired
     private QueryService queryService;
 
-    @RequestMapping(value = "/jdbc/catalogs", method = RequestMethod.POST)
+    @RequestMapping(value = "/catalogs", method = RequestMethod.POST)
     public ResponseEntity<?> getCatalogs(@RequestBody CatalogRequest request) {
         try {
             List<String> catalogs = queryService.queryCatalogs(request.getDbName());
@@ -39,7 +37,7 @@ public class QueryController {
         }
     }
 
-    @RequestMapping(value = "/jdbc/schemas", method = RequestMethod.POST)
+    @RequestMapping(value = "/schemas", method = RequestMethod.POST)
     public ResponseEntity<?> getSchemas(@RequestBody SchemaRequest request) {
         try {
             List<SchemaMeta> schemaMetas = queryService.querySchemaMetas(request.getDbName());
@@ -49,7 +47,7 @@ public class QueryController {
         }
     }
 
-    @RequestMapping(value = "/jdbc/tables", method = RequestMethod.POST)
+    @RequestMapping(value = "/tables", method = RequestMethod.POST)
     public ResponseEntity<?> getTables(@RequestBody TableMetaRequest request) {
         try {
             List<TableMeta> tableMetas = queryService.queryTableMetas(request.getDbName());
@@ -59,7 +57,7 @@ public class QueryController {
         }
     }
 
-    @RequestMapping(value = "/jdbc/columns", method = RequestMethod.POST)
+    @RequestMapping(value = "/columns", method = RequestMethod.POST)
     public ResponseEntity<?> getColumns(@RequestBody ColumnMetaRequest request) {
         try {
             List<ColumnMeta> columnMetas = queryService.queryColumnMetas(request.getDbName(), request.getTableName());
@@ -69,7 +67,7 @@ public class QueryController {
         }
     }
 
-    @RequestMapping(value = "/jdbc/tableTypes", method = RequestMethod.POST)
+    @RequestMapping(value = "/tableTypes", method = RequestMethod.POST)
     public ResponseEntity<?> getTableTypes(@RequestBody TableTypeRequest request) {
         try {
             List<String> catalogs = queryService.queryTableTypes(request.getDbName());
@@ -79,7 +77,7 @@ public class QueryController {
         }
     }
 
-    @RequestMapping(value = "/jdbc/query", method = RequestMethod.POST)
+    @RequestMapping(value = "/query", method = RequestMethod.POST)
     public ResponseEntity<?> query(@RequestBody SqlRequest request) {
         try {
             QueryResult queryResult = queryService.query(request.getSql());

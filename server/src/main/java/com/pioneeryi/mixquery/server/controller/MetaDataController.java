@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/tedi-sql/meta")
+@RequestMapping("/mixquery/meta")
 public class MetaDataController {
 
     @Autowired
