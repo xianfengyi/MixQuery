@@ -72,7 +72,7 @@ public class MixqClient implements IRemoteClient {
 
     private ExecuteResult doExecuteQuery(String sql, List<StatementParameter> params, int timeoutS)
             throws MixqJdbcException {
-        String url = getBaseUrl() + "/tedi-sql/jdbc/query";
+        String url = getBaseUrl() + "/mixquery/jdbc/query";
 
         ExecuteRequest requestBody = new ExecuteRequest(sql, params, timeoutS, isSync(), getDialect());
 
@@ -129,7 +129,7 @@ public class MixqClient implements IRemoteClient {
 
     @Override
     public List<MetaImpl.MetaCatalog> getCatalogs() throws MixqJdbcException {
-        String url = HttpUtil.buildUrl(getBaseUrl() + "/tedi-sql/jdbc/catalogs", buildRequestParams());
+        String url = HttpUtil.buildUrl(getBaseUrl() + "/mixquery/jdbc/catalogs", buildRequestParams());
 
         List<String> result = postRequest(url, null, SYNC_HTTP_TIMEOUT, new TypeReference<List<String>>() {
         });
@@ -140,7 +140,7 @@ public class MixqClient implements IRemoteClient {
 
     @Override
     public List<MetaImpl.MetaSchema> getSchemas(String catalog, String schemaPattern) throws MixqJdbcException {
-        String url = HttpUtil.buildUrl(getBaseUrl() + "/tedi-sql/jdbc/schemas", buildRequestParams());
+        String url = HttpUtil.buildUrl(getBaseUrl() + "/mixquery/jdbc/schemas", buildRequestParams());
 
         SchemaMetaRequest requestBody = new SchemaMetaRequest(catalog, schemaPattern);
 
@@ -159,7 +159,7 @@ public class MixqClient implements IRemoteClient {
 
     @Override
     public List<MetaImpl.MetaTable> getTables(String catalog, String schemaPattern, String tableNamePattern, List<String> typeList) throws MixqJdbcException {
-        String url = HttpUtil.buildUrl(getBaseUrl() + "/tedi-sql/jdbc/tables", buildRequestParams());
+        String url = HttpUtil.buildUrl(getBaseUrl() + "/mixquery/jdbc/tables", buildRequestParams());
 
         TableMetaRequest requestBody = new TableMetaRequest(catalog, schemaPattern, tableNamePattern, typeList);
 
@@ -179,7 +179,7 @@ public class MixqClient implements IRemoteClient {
 
     @Override
     public List<MetaImpl.MetaColumn> getColumns(String catalog, String schemaPattern, String tableNamePattern, String columnNamePattern) throws MixqJdbcException {
-        String url = HttpUtil.buildUrl(getBaseUrl() + "/tedi-sql/jdbc/columns", buildRequestParams());
+        String url = HttpUtil.buildUrl(getBaseUrl() + "/mixquery/jdbc/columns", buildRequestParams());
 
         ColumnMetaRequest requestBody = new ColumnMetaRequest(catalog, schemaPattern, tableNamePattern,
                 columnNamePattern);
@@ -202,7 +202,7 @@ public class MixqClient implements IRemoteClient {
 
     @Override
     public List<MetaImpl.MetaTableType> getTableTypes() throws MixqJdbcException {
-        String url = HttpUtil.buildUrl(getBaseUrl() + "/tedi-sql/jdbc/tableTypes", buildRequestParams());
+        String url = HttpUtil.buildUrl(getBaseUrl() + "/mixquery/jdbc/tableTypes", buildRequestParams());
 
         //调用api获取结果
         List<String> result = postRequest(url, null, SYNC_HTTP_TIMEOUT, new TypeReference<List<String>>() {

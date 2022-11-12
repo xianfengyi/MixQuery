@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/mixquery/jdbc")
+@RequestMapping("/mixquery")
 public class QueryController {
 
     private static final Logger log = LoggerFactory.getLogger(QueryController.class);
@@ -27,7 +27,7 @@ public class QueryController {
     @Autowired
     private QueryService queryService;
 
-    @RequestMapping(value = "/catalogs", method = RequestMethod.POST)
+    @RequestMapping(value = "/jdbc/catalogs", method = RequestMethod.POST)
     public ResponseEntity<?> getCatalogs(@RequestBody CatalogRequest request) {
         try {
             List<String> catalogs = queryService.queryCatalogs(request.getDbName());
@@ -37,7 +37,7 @@ public class QueryController {
         }
     }
 
-    @RequestMapping(value = "/schemas", method = RequestMethod.POST)
+    @RequestMapping(value = "/jdbc/schemas", method = RequestMethod.POST)
     public ResponseEntity<?> getSchemas(@RequestBody SchemaRequest request) {
         try {
             List<SchemaMeta> schemaMetas = queryService.querySchemaMetas(request.getDbName());
@@ -47,7 +47,7 @@ public class QueryController {
         }
     }
 
-    @RequestMapping(value = "/tables", method = RequestMethod.POST)
+    @RequestMapping(value = "/jdbc/tables", method = RequestMethod.POST)
     public ResponseEntity<?> getTables(@RequestBody TableMetaRequest request) {
         try {
             List<TableMeta> tableMetas = queryService.queryTableMetas(request.getDbName());
@@ -57,7 +57,7 @@ public class QueryController {
         }
     }
 
-    @RequestMapping(value = "/columns", method = RequestMethod.POST)
+    @RequestMapping(value = "/jdbc/columns", method = RequestMethod.POST)
     public ResponseEntity<?> getColumns(@RequestBody ColumnMetaRequest request) {
         try {
             List<ColumnMeta> columnMetas = queryService.queryColumnMetas(request.getDbName(), request.getTableName());
@@ -67,7 +67,7 @@ public class QueryController {
         }
     }
 
-    @RequestMapping(value = "/tableTypes", method = RequestMethod.POST)
+    @RequestMapping(value = "/jdbc/tableTypes", method = RequestMethod.POST)
     public ResponseEntity<?> getTableTypes(@RequestBody TableTypeRequest request) {
         try {
             List<String> catalogs = queryService.queryTableTypes(request.getDbName());
