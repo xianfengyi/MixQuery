@@ -9,3 +9,73 @@
 此外，对于数据计算，也需要做到灵活支持多种计算引擎。并且，要有SQL优化的能力。
 ## 整体架构
 ![整体架构](https://github.com/xianfengyi/photos/blob/main/mixquery/MixQuery%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84.png)
+
+## 快速开始
+初始化愿数据数据库:
+```sql
+CREATE TABLE t_meta_calcite_schema (
+   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+   `name` varchar(255) NOT NULL COMMENT 'schema名',
+   `type` varchar(255) NOT NULL DEFAULT '' COMMENT 'schema类型',
+   `factory` varchar(255) NOT NULL COMMENT 'jdbc factory',
+   `operand` varchar(255) NOT NULL COMMENT 'schema operand',
+   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
+准备测试数据：学生信息，以及成绩，学生信息放到Mysql中，成绩信息放到PostgreSQL中。
+Mysql：
+```sql
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `sex` varchar(5) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+
+INSERT INTO `test`.`student` (`id`, `name`, `sex`) VALUES (1, '小明', '男');
+INSERT INTO `test`.`student` (`id`, `name`, `sex`) VALUES (2, '小红', '女');
+```
+PostgreSQL:
+```sql
+CREATE TABLE IF NOT EXISTS score
+(
+    id integer NOT NULL,
+    student_id integer NOT NULL,
+    grade integer NOT NULL,
+    PRIMARY KEY (id)
+)
+
+insert into score(id,student_id,grade)values(1,1,80);
+insert into score(id,student_id,grade)values(2,2,90);
+```
+
+测试异构数据源查询SQL:
+```sql
+select student.*,score.grade 
+from db1.student as student 
+    join db2.score as score on student.id=score.student_id
+```
+
+通过自定义JDBC驱动查询数据：
+```java
+@Test
+public void testTediSqlQuery_join() throws ClassNotFoundException {
+    Class.forName("com.pioneeryi.mixquery.jdbc.Driver");
+
+    try (Connection conn = DriverManager.getConnection("jdbc:mixquery:localhost:9093/mixquery")) {
+        // 查询数据
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("select student.*,score.grade from db1.student as student join db2.score as score on student.id=score.student_id");
+        printRs(rs);
+    } catch (SQLException exception) {
+        exception.printStackTrace();
+    }
+}
+```
+查询结果：
+```shell
+id:1 , name:小明 , sex:男 , grade:80
+id:2 , name:小红 , sex:女 , grade:90
+```
