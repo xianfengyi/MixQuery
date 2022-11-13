@@ -77,7 +77,7 @@ public class QueryController {
         }
     }
 
-    @RequestMapping(value = "/query", method = RequestMethod.POST)
+    @RequestMapping(value = "/jdbc/query", method = RequestMethod.POST)
     public ResponseEntity<?> query(@RequestBody SqlRequest request) {
         try {
             QueryResult queryResult = queryService.query(request.getSql());
