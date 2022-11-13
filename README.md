@@ -61,7 +61,7 @@ from db1.student as student
     join db2.score as score on student.id=score.student_id
 ```
 
-通过自定义JDBC驱动查询数据：
+通过自定义JDBC驱动，进行MYSQL中的student表与PostgreSQL中score表join查询：
 ```java
 @Test
 public void testTediSqlQuery_join() throws ClassNotFoundException {
