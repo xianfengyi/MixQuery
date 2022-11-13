@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = {"com.github.pioneeryi.gateway.dao.mapper"}, sqlSessionTemplateRef = "sqlSessionTemplate")
+@MapperScan(basePackages = {"com.pioneeryi.mixquery.meta.gateway.dao.mapper"}, sqlSessionTemplateRef = "sqlSessionTemplate")
 public class MetaDataSourceConfig {
 
     private static final Logger log = LoggerFactory.getLogger(MetaDataSourceConfig.class);
