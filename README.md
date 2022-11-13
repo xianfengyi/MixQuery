@@ -9,7 +9,7 @@
 此外，对于数据计算，也需要做到灵活支持多种计算引擎。并且，要有SQL优化的能力。
 ## 整体架构
 ![整体架构](https://github.com/xianfengyi/photos/blob/main/mixquery/MixQuery%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84.png)
-
+PS:这是预期的架构，现在只实现了非常简单的功能
 ## 快速开始
 初始化元数据数据库:
 ```sql
