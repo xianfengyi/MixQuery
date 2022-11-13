@@ -64,7 +64,7 @@ from db1.student as student
 通过自定义JDBC驱动，进行MYSQL中的student表与PostgreSQL中score表join查询：
 ```java
 @Test
-public void testTediSqlQuery_join() throws ClassNotFoundException {
+public void testMixSqlQuery_join() throws ClassNotFoundException {
     Class.forName("com.pioneeryi.mixquery.jdbc.Driver");
 
     try (Connection conn = DriverManager.getConnection("jdbc:mixquery:localhost:9093/mixquery")) {

@@ -7,7 +7,7 @@ import java.sql.*;
 public class JdbcSqlTest {
 
     @Test
-    public void testTediSqlQuery_simple() throws ClassNotFoundException {
+    public void testMixSqlQuery_simple() throws ClassNotFoundException {
         Class.forName("com.pioneeryi.mixquery.jdbc.Driver");
 
         try (Connection conn = DriverManager.getConnection("jdbc:mixquery:localhost:9093/mixquery")) {
@@ -21,7 +21,7 @@ public class JdbcSqlTest {
     }
 
     @Test
-    public void testTediSqlQuery_join() throws ClassNotFoundException {
+    public void testMixSqlQuery_join() throws ClassNotFoundException {
         Class.forName("com.pioneeryi.mixquery.jdbc.Driver");
 
         try (Connection conn = DriverManager.getConnection("jdbc:mixquery:localhost:9093/mixquery")) {
