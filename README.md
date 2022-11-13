@@ -11,7 +11,7 @@
 ![整体架构](https://github.com/xianfengyi/photos/blob/main/mixquery/MixQuery%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84.png)
 
 ## 快速开始
-初始化愿数据数据库:
+初始化元数据数据库:
 ```sql
 CREATE TABLE t_meta_calcite_schema (
    `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -22,6 +22,9 @@ CREATE TABLE t_meta_calcite_schema (
    `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `mixquery`.`t_meta_calcite_schema` (`id`, `name`, `type`, `factory`, `operand`, `update_time`) VALUES (1, 'db1', 'custom', 'org.apache.calcite.adapter.jdbc.JdbcSchema$Factory', '{\"jdbcDriver\": \"com.mysql.cj.jdbc.Driver\",\"jdbcUrl\": \"jdbc:mysql://localhost:3306/test\",\"jdbcUser\": \"root\",\"jdbcPassword\": \"123456\"}', '2022-09-03 22:17:34');
+INSERT INTO `mixquery`.`t_meta_calcite_schema` (`id`, `name`, `type`, `factory`, `operand`, `update_time`) VALUES (2, 'db2', 'custom', 'org.apache.calcite.adapter.jdbc.JdbcSchema$Factory', '{\"jdbcDriver\": \"org.postgresql.Driver\",\"jdbcUrl\": \"jdbc:postgresql://localhost:5432/test\",\"jdbcUser\": \"postgres\",\"jdbcPassword\": \"123456\"}', '2022-09-03 22:51:12');
 ```
 准备测试数据：学生信息，以及成绩，学生信息放到Mysql中，成绩信息放到PostgreSQL中。
 Mysql：
